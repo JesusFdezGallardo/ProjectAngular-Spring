@@ -1,0 +1,10 @@
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'jesus@gmail.com', 'Jesus', 'jesus123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'pepe@gmail.com', 'Pepe', 'pepe123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'laura@gmail.com', 'Laura', 'laura123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'ramon@gmail.com', 'Ramon', 'ramon123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'alex@gmail.com', 'Alex', 'alex123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'izan@gmail.com', 'Izan', 'izan123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'carla@gmail.com', 'Carla', 'carla123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'leyre@gmail.com', 'Leyre', 'leyre123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'axel@gmail.com', 'Axel', 'axel123');
+insert into usuarios (apellido, correo, nombre, pass) VALUES ('Fernandez', 'jose@gmail.com', 'Jose', 'jose123');
