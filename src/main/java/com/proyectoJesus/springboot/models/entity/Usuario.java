@@ -56,7 +56,11 @@ public class Usuario implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "alumnos", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"alumnos", "id", "hibernateLazyInitializer", "handler" }) 
 	private List<Asignatura> asignaturas;
-		
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"alumnos", "asignaturas", "practicas", "hibernateLazyInitializer", "handler" }) 
+	private List<Asignatura> asignaturasProfesor;
+	
 	//Constructor arraylist Asignaturas	
 	public Usuario() {
 		this.asignaturas = new ArrayList<>();
@@ -122,6 +126,14 @@ public class Usuario implements Serializable {
 
 	public void setAsignaturas(List<Asignatura> asignaturas) {
 		this.asignaturas = asignaturas;
+	}
+
+	public List<Asignatura> getAsignaturasProfesor() {
+		return asignaturasProfesor;
+	}
+
+	public void setAsignaturasProfesor(List<Asignatura> asignaturasProfesor) {
+		this.asignaturasProfesor = asignaturasProfesor;
 	}
 
 }

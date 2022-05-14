@@ -9,6 +9,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.naming.Binding;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,12 @@ public class UsuarioRestController {
 		return usuarioService.findAll();
 	}
 
+	@GetMapping("/usuariosAlumnos") // Mapeamos la URL
+	// Crea método index para listar usuarios
+	public List<Usuario> indexAlumnos() {
+		return usuarioService.findUsuariosAlumnos();
+	}
+	
 //	//Buscar por ID
 //	@GetMapping("/usuarios/{id}")
 //	@ResponseStatus(HttpStatus.OK) //Mensaje que muestra. 200 = búsqueda correcta
@@ -81,6 +88,8 @@ public class UsuarioRestController {
 		// Devuelve con argumento tipo de dato y la respuesta Http Status
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
+	
+	
 
 	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED) // Mensaje que muestra. 201 = creado contenido. Anotacion VALID para comprobar

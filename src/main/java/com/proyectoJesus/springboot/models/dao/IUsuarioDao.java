@@ -14,4 +14,9 @@ public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 
 	@Query("from Rol")
 	public List<Rol> findAllRoles();
+		
+	@Query("FROM Usuario a WHERE a.rol LIKE 1")
+	public List<Usuario> findUsuariosAlumnos(); 
+	
+	
 }

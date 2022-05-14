@@ -23,20 +23,23 @@ public class IAsignaturaServiceImpl implements IAsignaturaService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public Asignatura finById(Long id) {
-		return asignaturaDAO.findById(id).orElse(null);
-	}
-
-	@Override
+	@Transactional
 	public Asignatura save(Asignatura asignatura) {
 		// TODO Auto-generated method stub
 		return asignaturaDAO.save(asignatura);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		asignaturaDAO.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public Asignatura findById(Long id) {
+		//orElse para que devuelva null si no la encuentra y evitar errores
+		return asignaturaDAO.findById(id).orElse(null);
 	}
 
 }

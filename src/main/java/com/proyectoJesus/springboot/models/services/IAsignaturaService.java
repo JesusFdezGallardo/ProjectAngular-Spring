@@ -11,10 +11,11 @@ public interface IAsignaturaService {
 	public List<Asignatura> findAll();
 
 	//Buscar usuario por Id
-	public Asignatura finById(Long id);
+	public Asignatura findById(Long id);
 	
 	//Metodos CRUD
 	public Asignatura save(Asignatura asignatura);
 	public void delete (Long id);
+	
 	
 }

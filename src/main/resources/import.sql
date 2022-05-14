@@ -31,3 +31,10 @@ insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 2);
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 3); 
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 4); 
 
+insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 1", 0, "Actividad 1"); 
+insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 2", 0, "Actividad 2"); 
+insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 3", 0, "Actividad 3"); 
+
+insert into asignaturas_practicas (id_asignatura, id_practica) VALUES (1,1); 
+insert into asignaturas_practicas (id_asignatura, id_practica) VALUES (1,2); 
+insert into asignaturas_practicas (id_asignatura, id_practica) VALUES (1,3); 

@@ -44,7 +44,7 @@ public class Asignatura implements Serializable {
 
 	// Muchas asignaturas están asociadas a un profesor
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JsonIgnoreProperties({"asignaturas", "rol", "id", "hibernateLazyInitializer", "handler" }) 
+	@JsonIgnoreProperties({"asignaturas", "rol","asignaturasProfesor", "id", "hibernateLazyInitializer", "handler" }) 
 	@JoinTable(name = "asignaturas_profesores", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_usuario"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "id_asignatura", "id_usuario" }) })
 	private Usuario profesor;
@@ -52,13 +52,20 @@ public class Asignatura implements Serializable {
 	//cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	@JsonIgnoreProperties({"asignaturas", "id", "rol" ,"hibernateLazyInitializer", "handler" }) 
+	@JsonIgnoreProperties({"asignaturas", "id", "asignaturasProfesor","rol" ,"hibernateLazyInitializer", "handler" }) 
 	@JoinTable(name = "asignaturas_alumnos", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_usuario"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "id_asignatura", "id_usuario" }) })
 	private List<Usuario> alumnos;
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnoreProperties({"asignaturas", "id", "rol" ,"hibernateLazyInitializer", "handler" }) 
+	@JoinTable(name = "asignaturas_practicas", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_practica"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "id_asignatura", "id_practica" }) })
+	private List<Practica> practicas; 
+	
 	public Asignatura() {
 		this.alumnos = new ArrayList<>();
+		this.practicas = new ArrayList<>();
 	}
 
 	public List<Usuario> getAlumnos() {
@@ -99,6 +106,14 @@ public class Asignatura implements Serializable {
 
 	public void setProfesor(Usuario profesor) {
 		this.profesor = profesor;
+	}
+
+	public List<Practica> getPracticas() {
+		return practicas;
+	}
+
+	public void setPracticas(List<Practica> practicas) {
+		this.practicas = practicas;
 	}
 
 }

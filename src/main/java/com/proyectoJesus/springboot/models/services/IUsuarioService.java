@@ -23,4 +23,6 @@ public interface IUsuarioService {
 	
 	//Rol
 	public List<Rol> findAllRoles();
+	
+	public List<Usuario> findUsuariosAlumnos(); 
 }

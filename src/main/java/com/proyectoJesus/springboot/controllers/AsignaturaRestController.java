@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proyectoJesus.springboot.models.entity.Asignatura;
 import com.proyectoJesus.springboot.models.entity.Usuario;
 import com.proyectoJesus.springboot.models.services.IAsignaturaService;
+import com.proyectoJesus.springboot.models.services.IUsuarioService;
 
 @CrossOrigin(origins = { "http://localhost:4200" }) // Comunica cliente servidor--> Angular - Spring
 @RestController // Indica que es un Rest Controller
@@ -34,6 +35,9 @@ public class AsignaturaRestController {
 	
 	@Autowired
 	private IAsignaturaService asignaturaService;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 	
 	@GetMapping("/asignaturas") // Mapeamos la URL
 	// Crea método index para listar usuarios
@@ -48,7 +52,7 @@ public class AsignaturaRestController {
 		// Tipo da dato MAP que almacene datos asociados a un nombre
 		Map<String, Object> response = new HashMap<>();
 		try {
-			asignaturaNueva = asignaturaService.finById(id);
+			asignaturaNueva = asignaturaService.findById(id);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error en la consulta en la BBDD!");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -96,7 +100,7 @@ public class AsignaturaRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@Valid @RequestBody Asignatura asignatura, BindingResult result, @PathVariable Long id) {
 
-		Asignatura asignaturaActual = asignaturaService.finById(id); // Modifico usuario con el usuario registrado en la bbdd
+		Asignatura asignaturaActual = asignaturaService.findById(id); // Modifico usuario con el usuario registrado en la bbdd
 		Asignatura asignaturaActualizada = null;
 		Map<String, Object> response = new HashMap<>();
 		if (result.hasErrors()) {

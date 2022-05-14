@@ -52,4 +52,10 @@ public class UsuarioServiceImpl implements IUsuarioService{
 		return usuariodao.findAllRoles();
 	}
 
+	@Override
+	public List<Usuario> findUsuariosAlumnos() {
+		// TODO Auto-generated method stub
+		return usuariodao.findUsuariosAlumnos();
+	}
+
 }
