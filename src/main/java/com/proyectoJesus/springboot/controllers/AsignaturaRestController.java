@@ -142,4 +142,10 @@ public class AsignaturaRestController {
 		response.put("mensaje", "La asignatura ha sido eliminada con éxito!");
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
+
+//	@PostMapping("/asignaturas")
+//	@ResponseStatus(HttpStatus.CREATED) 
+//	public Asignatura crear(@RequestBody Asignatura asignatura) {
+//		return asignaturaService.save(asignatura);
+//	}
 }

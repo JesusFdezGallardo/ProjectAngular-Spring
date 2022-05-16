@@ -53,9 +53,15 @@ public class UsuarioServiceImpl implements IUsuarioService{
 	}
 
 	@Override
+	@Transactional
 	public List<Usuario> findUsuariosAlumnos() {
-		// TODO Auto-generated method stub
 		return usuariodao.findUsuariosAlumnos();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Usuario> findByRolProfesor() {
+		return usuariodao.findByRolProfesor();
 	}
 
 }

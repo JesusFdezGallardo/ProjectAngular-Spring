@@ -55,13 +55,6 @@ public class UsuarioRestController {
 		return usuarioService.findUsuariosAlumnos();
 	}
 	
-//	//Buscar por ID
-//	@GetMapping("/usuarios/{id}")
-//	@ResponseStatus(HttpStatus.OK) //Mensaje que muestra. 200 = búsqueda correcta
-//	public Usuario show(@PathVariable Long id) {
-//		return usuarioService.finById(id);
-//	}
-
 	// Buscar por ID con la clase ResponseEntity de Spring para manejar mensajes de
 	// error
 	// Se usa ? para decir que es un tipo de dato genérico, no tiene porque ser
@@ -88,8 +81,6 @@ public class UsuarioRestController {
 		// Devuelve con argumento tipo de dato y la respuesta Http Status
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
-	
-	
 
 	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED) // Mensaje que muestra. 201 = creado contenido. Anotacion VALID para comprobar
@@ -131,7 +122,6 @@ public class UsuarioRestController {
 					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
 					.collect(Collectors.toList());
 		}
-
 		// Error por id
 		if (usuarioActual == null) {
 			response.put("error",
@@ -170,6 +160,12 @@ public class UsuarioRestController {
 		}
 		response.put("mensaje", "El usuario ha sido eliminado con éxito!");
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping("/usuarios/profesores")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Usuario> listaProfesores(){
+		return usuarioService.findByRolProfesor();
 	}
 
 	@GetMapping("/usuarios/roles")

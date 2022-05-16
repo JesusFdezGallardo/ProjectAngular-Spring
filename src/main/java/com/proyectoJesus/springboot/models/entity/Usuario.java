@@ -32,6 +32,10 @@ public class Usuario implements Serializable {
 	@Size(min = 4, max = 12)
 	@Column(nullable = false, name = "nombre")
 	private String nombre;
+	
+//	@NotEmpty(message = "no puede estar vacío") // Anotacion para cambiar el idioma y mensajes de error
+//	@Column(nullable = false, name = "usuario", unique = true)
+//	private String usuario;
 
 	@NotEmpty(message = "no puede estar vacío")
 	@Column(name = "pass")
@@ -135,5 +139,13 @@ public class Usuario implements Serializable {
 	public void setAsignaturasProfesor(List<Asignatura> asignaturasProfesor) {
 		this.asignaturasProfesor = asignaturasProfesor;
 	}
+
+//	public String getUsuario() {
+//		return usuario;
+//	}
+//
+//	public void setUsuario(String usuario) {
+//		this.usuario = usuario;
+//	}
 
 }
