@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,17 +49,12 @@ public class UsuarioRestController {
 	public List<Usuario> index() {
 		return usuarioService.findAll();
 	}
-
-	@GetMapping("/usuariosAlumnos") // Mapeamos la URL
-	// Crea método index para listar usuarios
-	public List<Usuario> indexAlumnos() {
-		return usuarioService.findUsuariosAlumnos();
-	}
 	
 	// Buscar por ID con la clase ResponseEntity de Spring para manejar mensajes de
 	// error
 	// Se usa ? para decir que es un tipo de dato genérico, no tiene porque ser
 	// Usuario
+	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR"})
 	@GetMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.OK) // Mensaje que muestra. 200 = búsqueda correcta
 	public ResponseEntity<?> show(@PathVariable Long id) {
@@ -81,7 +77,8 @@ public class UsuarioRestController {
 		// Devuelve con argumento tipo de dato y la respuesta Http Status
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
-
+	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/usuarios")
 	@ResponseStatus(HttpStatus.CREATED) // Mensaje que muestra. 201 = creado contenido. Anotacion VALID para comprobar
 	public ResponseEntity<?> create(@Valid @RequestBody Usuario usuario, BindingResult result) {
@@ -109,7 +106,8 @@ public class UsuarioRestController {
 		response.put("usuario", usuarioNuevo);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-
+	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@Valid @RequestBody Usuario usuario, BindingResult result, @PathVariable Long id) {
@@ -133,7 +131,7 @@ public class UsuarioRestController {
 			usuarioActual.setPass(usuario.getPass());
 			usuarioActual.setApellido(usuario.getApellido());
 			usuarioActual.setCorreoElectronico(usuario.getCorreoElectronico());
-			usuarioActual.setRol(usuario.getRol());
+			usuarioActual.setRoles(usuario.getRoles());
 			usuarioUpdate = usuarioService.save(usuarioActual);
 
 		} catch (DataAccessException e) {
@@ -146,7 +144,8 @@ public class UsuarioRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 
 	}
-
+	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -162,12 +161,13 @@ public class UsuarioRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
-	@GetMapping("/usuarios/profesores")
-	@ResponseStatus(HttpStatus.OK)
-	public List<Usuario> listaProfesores(){
-		return usuarioService.findByRolProfesor();
-	}
-
+//	@GetMapping("/usuarios/profesores")
+//	@ResponseStatus(HttpStatus.OK)
+//	public List<Usuario> listaProfesores(){
+//		return usuarioService.findByRolProfesor();
+//	}
+	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/usuarios/roles")
 	public List<Rol> listaRoles(){
 		return usuarioService.findAllRoles();

@@ -33,9 +33,9 @@ public class Usuario implements Serializable {
 	@Column(nullable = false, name = "nombre")
 	private String nombre;
 	
-//	@NotEmpty(message = "no puede estar vacío") // Anotacion para cambiar el idioma y mensajes de error
-//	@Column(nullable = false, name = "usuario", unique = true)
-//	private String usuario;
+	@NotEmpty(message = "no puede estar vacío") // Anotacion para cambiar el idioma y mensajes de error
+	@Column(nullable = false, name = "usuario", unique = true)
+	private String usuario;
 
 	@NotEmpty(message = "no puede estar vacío")
 	@Column(name = "pass")
@@ -51,11 +51,11 @@ public class Usuario implements Serializable {
 	@Column(nullable = false, unique = true, name = "correo")
 	private String correoElectronico;
 
-	@NotNull(message = "el rol no puede estar vacío")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rol_id")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" }) // omitimos atributos de Json para evitar errores
-	private Rol rol;
+//	@NotNull(message = "el rol no puede estar vacío")
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "rol_id")
+//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" }) // omitimos atributos de Json para evitar errores
+//	private Rol rol;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "alumnos", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"alumnos", "id", "hibernateLazyInitializer", "handler" }) 
@@ -116,13 +116,13 @@ public class Usuario implements Serializable {
 				+ ", correoElectronico=" + correoElectronico + "]";
 	}
 
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
+//	public Rol getRol() {
+//		return rol;
+//	}
+//
+//	public void setRol(Rol rol) {
+//		this.rol = rol;
+//	}
 
 	public List<Asignatura> getAsignaturas() {
 		return asignaturas;
@@ -140,12 +140,27 @@ public class Usuario implements Serializable {
 		this.asignaturasProfesor = asignaturasProfesor;
 	}
 
-//	public String getUsuario() {
-//		return usuario;
-//	}
-//
-//	public void setUsuario(String usuario) {
-//		this.usuario = usuario;
-//	}
+	public String getUsuario() {
+		return usuario;
+	}
 
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="usuario_id"),
+	inverseJoinColumns=@JoinColumn(name="role_id"),
+	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "role_id"})})
+	private List<Rol> roles;
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
+	
+	
 }

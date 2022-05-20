@@ -1,17 +1,14 @@
-insert INTO roles (nombre) VALUES ("Alumno"); 
-insert INTO roles (nombre) VALUES ("Administrador"); 
-insert INTO roles (nombre) VALUES ("Profesor"); 
+insert INTO roles (nombre) VALUES ("ROLE_ALUMNO"); 
+insert INTO roles (nombre) VALUES ("ROLE_ADMIN"); 
+insert INTO roles (nombre) VALUES ("ROLE_PROFESOR"); 
 
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (1, 'Fernandez', 'jesus@gmail.com', 'Jesus', 'jesus123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (1, 'Fernandez', 'pepe@gmail.com', 'Pepe', 'pepe123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (1, 'Fernandez', 'laura@gmail.com', 'Laura', 'laura123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (1, 'Fernandez', 'ramon@gmail.com', 'Ramon', 'ramon123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (1, 'Fernandez', 'alex@gmail.com', 'Alex', 'alex123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (1, 'Fernandez', 'izan@gmail.com', 'Izan', 'izan123');
-insert into usuarios (rol_id ,apellido, correo, nombre, pass) VALUES (2, 'Fernandez', 'carla@gmail.com', 'Carla', 'carla123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (2, 'Fernandez', 'leyre@gmail.com', 'Leyre', 'leyre123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (2, 'Fernandez', 'axel@gmail.com', 'Axel', 'axel123');
-insert into usuarios (rol_id, apellido, correo, nombre, pass) VALUES (3, 'Fernandez', 'jose@gmail.com', 'Jose', 'jose123');
+insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('jesusf', 'Fernandez', 'jesus@gmail.com', 'Jesus', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
+insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('axelf', 'Fernandez', 'axel@gmail.com', 'Axel', '$2a$10$3nGpYeEmoobDCg6nrg0JquAT0btp1YIN9StJ2yg4d5lJdh6KYA0ey');
+insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('josef', 'Fernandez', 'jose@gmail.com', 'Jose', '$2a$10$PnB94Tqe2CpymYO.z3TvXuSdaBfP9KmkNUxormKkU4PbAyCK/dWIO');
+
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
 
 insert INTO asignaturas (nombre) VALUES ("Desarrollo de Interfaces"); 
 insert INTO asignaturas (nombre) VALUES ("Bases de Datos");
@@ -19,17 +16,11 @@ insert INTO asignaturas (nombre) VALUES ("Acceso a Datos");
 insert INTO asignaturas (nombre) VALUES ("Sistemas y Procesos");
 
 insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,1); 
-insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (2,1); 
-insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (3,1); 
-insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (4,1); 
-insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,2); 
-insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,3); 
-insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,4); 
 
-insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 1); 
-insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 2); 
-insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 3); 
-insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (10, 4); 
+insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (3, 1); 
+insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (3, 2); 
+insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (3, 3); 
+insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (3, 4); 
 
 insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 1", 0, "Actividad 1"); 
 insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 2", 0, "Actividad 2"); 
