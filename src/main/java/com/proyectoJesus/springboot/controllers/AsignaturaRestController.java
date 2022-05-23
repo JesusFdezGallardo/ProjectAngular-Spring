@@ -70,7 +70,7 @@ public class AsignaturaRestController {
 	
 	@PostMapping("/asignaturas")
 	@ResponseStatus(HttpStatus.CREATED) // Mensaje que muestra. 201 = creado contenido. Anotacion VALID para comprobar
-	public ResponseEntity<?> create(@Valid @RequestBody Asignatura asignatura, BindingResult result) {
+	public ResponseEntity<?> create(@Valid @RequestBody Asignatura asignatura, BindingResult result, @RequestBody Usuario usuario) {
 
 		Asignatura asignaturaNueva = null;
 		Map<String, Object> response = new HashMap<>();
@@ -85,6 +85,7 @@ public class AsignaturaRestController {
 		}
 		
 		try {
+			asignatura.setProfesor(usuario);
 			asignaturaNueva = asignaturaService.save(asignatura);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al insertar en la BBDD!");

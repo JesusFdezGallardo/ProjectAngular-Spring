@@ -17,6 +17,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,6 +45,9 @@ public class UsuarioRestController {
 	@Autowired
 	private IUsuarioService usuarioService;
 	
+	@Autowired 
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/usuarios") // Mapeamos la URL
 	// Crea método index para listar usuarios
 	public List<Usuario> index() {
@@ -54,7 +58,7 @@ public class UsuarioRestController {
 	// error
 	// Se usa ? para decir que es un tipo de dato genérico, no tiene porque ser
 	// Usuario
-	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR"})
+	//@Secured({"ROLE_ADMIN", "ROLE_PROFESOR"})
 	@GetMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.OK) // Mensaje que muestra. 200 = búsqueda correcta
 	public ResponseEntity<?> show(@PathVariable Long id) {
@@ -96,6 +100,21 @@ public class UsuarioRestController {
 		}
 		
 		try {
+			Rol rol = new Rol();		
+			
+			rol.setId((long) 1);
+			rol.setNombre("ROLE_USER");	
+			
+			List<Rol> listaroles = new ArrayList<>() ;
+			
+			listaroles.add(rol);
+			usuario.setRoles(listaroles);
+			
+			//Encriptar contraseña
+			String passwordBcrypt = passwordEncoder.encode(usuario.getPass());
+			 
+			usuario.setPass(passwordEncoder.encode(usuario.getPass()));
+			
 			usuarioNuevo = usuarioService.save(usuario);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al insertar en la BBDD!");
@@ -131,8 +150,18 @@ public class UsuarioRestController {
 			usuarioActual.setPass(usuario.getPass());
 			usuarioActual.setApellido(usuario.getApellido());
 			usuarioActual.setCorreoElectronico(usuario.getCorreoElectronico());
-			usuarioActual.setRoles(usuario.getRoles());
-			usuarioUpdate = usuarioService.save(usuarioActual);
+			/*
+			Rol rol = new Rol();		
+			
+			rol.setId((long) 1);
+			rol.setNombre("ROLE_USER");	
+			
+			List<Rol> listaroles = new ArrayList<>() ;
+			
+			listaroles.add(rol);
+			usuarioActual.setRoles(listaroles);
+			*/
+			usuarioUpdate = usuarioService.save(usuario);
 
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al actualizar el usuario en la BBDD!");
@@ -161,11 +190,19 @@ public class UsuarioRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 	
-//	@GetMapping("/usuarios/profesores")
-//	@ResponseStatus(HttpStatus.OK)
-//	public List<Usuario> listaProfesores(){
-//		return usuarioService.findByRolProfesor();
-//	}
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/usuarios/profesores")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Usuario> listaProfesores(){
+		return usuarioService.findByRolProfesor();
+	}
+	
+	@Secured({"ROLE_ADMIN" , "ROLE_PROFESOR"})
+	@GetMapping("/usuarios/alumnos")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Usuario> listaAlumnos(){
+		return usuarioService.findUsuariosAlumnos();
+	}
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/usuarios/roles")

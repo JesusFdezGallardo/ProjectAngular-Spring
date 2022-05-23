@@ -26,14 +26,15 @@ import com.proyectoJesus.springboot.models.entity.Usuario;
 @Service
 public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 
-	//Inyeccion del DAO en cualquier otro componente o clase de la aplicacion
+	// Inyeccion del DAO en cualquier otro componente o clase de la aplicacion
 	@Autowired
 	private IUsuarioDao usuariodao;
-	
+
 	private Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
 	@Override
-	//Transaccion sólo de lectura. No es necesario porque lo da la clase CrudRepository. SOLO USAMOS METODOS PROPIOS
+	// Transaccion sólo de lectura. No es necesario porque lo da la clase
+	// CrudRepository. SOLO USAMOS METODOS PROPIOS
 	@Transactional(readOnly = true)
 	public List<Usuario> findAll() {
 		return (List<Usuario>) usuariodao.findAll();
@@ -57,7 +58,7 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	@Transactional
 	public void delete(Long id) {
 		usuariodao.deleteById(id);
-		
+
 	}
 
 	@Override
@@ -66,41 +67,39 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 		return usuariodao.findAllRoles();
 	}
 
-//	@Override
-//	@Transactional
-//	public List<Usuario> findUsuariosAlumnos() {
-//		return usuariodao.findUsuariosAlumnos();
-//	}
-//
-//	@Override
-//	@Transactional(readOnly = true)
-//	public List<Usuario> findByRolProfesor() {
-//		return usuariodao.findByRolProfesor();
-//	}
-
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuariodao.findByUsuario(username);
-		
-		if(usuario == null) {
-			logger.error("Error: no existe el usuario '"+username+"' en el sistema!");
-			throw new UsernameNotFoundException("Error en el login: no existe el usuario '"+username+"' en el sistema!");
+
+		if (usuario == null) {
+			logger.error("Error: no existe el usuario '" + username + "' en el sistema!");
+			throw new UsernameNotFoundException(
+					"Error en el login: no existe el usuario '" + username + "' en el sistema!");
 		}
-		
-		List<GrantedAuthority> authorities = usuario.getRoles()
-				.stream()
+
+		List<GrantedAuthority> authorities = usuario.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getNombre()))
-				.peek(authority -> logger.info("Role: " + authority.getAuthority()))
-				.collect(Collectors.toList());
-		
+				.peek(authority -> logger.info("Role: " + authority.getAuthority())).collect(Collectors.toList());
+
 		return new User(usuario.getUsuario(), usuario.getPass(), true, true, true, true, authorities);
 	}
 
-@Override
-@Transactional(readOnly=true)
-public Usuario findByUsuario(String username) {
-	return usuariodao.findByUsuario(username);
-}
-	
+	@Override
+	@Transactional(readOnly = true)
+	public Usuario findByUsuario(String username) {
+		return usuariodao.findByUsuario(username);
+	}
+
+	@Override
+	public List<Usuario> findByRolProfesor() {
+		return usuariodao.findByRolProfesor();
+	}
+
+	@Override
+	public List<Usuario> findUsuariosAlumnos() {
+		// TODO Auto-generated method stub
+		return usuariodao.findUsuariosAlumnos();
+	}
+
 }
