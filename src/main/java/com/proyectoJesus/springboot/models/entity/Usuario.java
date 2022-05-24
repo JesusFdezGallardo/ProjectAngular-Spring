@@ -58,11 +58,11 @@ public class Usuario implements Serializable {
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "role_id"})})
 	private List<Rol> roles;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "alumnos", cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "alumnos")
 	@JsonIgnoreProperties({"alumnos", "id", "hibernateLazyInitializer", "handler" }) 
 	private List<Asignatura> asignaturas;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor") 
 	@JsonIgnoreProperties({"alumnos", "asignaturas", "practicas", "hibernateLazyInitializer", "handler" }) 
 	private List<Asignatura> asignaturasProfesor;
 	

@@ -36,7 +36,7 @@ public class IAsignaturaServiceImpl implements IAsignaturaService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly = true)
 	public Asignatura findById(Long id) {
 		//orElse para que devuelva null si no la encuentra y evitar errores
 		return asignaturaDAO.findById(id).orElse(null);

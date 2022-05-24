@@ -48,7 +48,7 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	}
 
 	@Override
-	@Transactional()
+	@Transactional
 	public Usuario save(Usuario usuario) {
 		// TODO Auto-generated method stub
 		return usuariodao.save(usuario);
@@ -92,14 +92,16 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Usuario> findByRolProfesor() {
 		return usuariodao.findByRolProfesor();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Usuario> findUsuariosAlumnos() {
 		// TODO Auto-generated method stub
-		return usuariodao.findUsuariosAlumnos();
+		return usuariodao.findByRolAlumno();
 	}
 
 }

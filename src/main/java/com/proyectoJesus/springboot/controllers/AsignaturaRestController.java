@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -68,9 +69,10 @@ public class AsignaturaRestController {
 		return new ResponseEntity<Asignatura>(asignaturaNueva, HttpStatus.OK);
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/asignaturas")
 	@ResponseStatus(HttpStatus.CREATED) // Mensaje que muestra. 201 = creado contenido. Anotacion VALID para comprobar
-	public ResponseEntity<?> create(@Valid @RequestBody Asignatura asignatura, BindingResult result, @RequestBody Usuario usuario) {
+	public ResponseEntity<?> create(@Valid @RequestBody Asignatura asignatura, BindingResult result) {
 
 		Asignatura asignaturaNueva = null;
 		Map<String, Object> response = new HashMap<>();
@@ -85,7 +87,6 @@ public class AsignaturaRestController {
 		}
 		
 		try {
-			asignatura.setProfesor(usuario);
 			asignaturaNueva = asignaturaService.save(asignatura);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al insertar en la BBDD!");
@@ -97,6 +98,7 @@ public class AsignaturaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/asignaturas/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@Valid @RequestBody Asignatura asignatura, BindingResult result, @PathVariable Long id) {
@@ -117,6 +119,7 @@ public class AsignaturaRestController {
 		}
 		try {
 			asignaturaActual.setNombre(asignatura.getNombre());
+			asignaturaActual.setProfesor(asignatura.getProfesor());
 			asignaturaActualizada = asignaturaService.save(asignaturaActual);
 
 		} catch (DataAccessException e) {
@@ -128,7 +131,7 @@ public class AsignaturaRestController {
 		response.put("usuario", asignaturaActualizada);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/asignaturas/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<?> delete(@PathVariable Long id) {
@@ -144,6 +147,7 @@ public class AsignaturaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
+	
 //	@PostMapping("/asignaturas")
 //	@ResponseStatus(HttpStatus.CREATED) 
 //	public Asignatura crear(@RequestBody Asignatura asignatura) {

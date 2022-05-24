@@ -43,7 +43,7 @@ public class Asignatura implements Serializable {
 	private String nombre;
 
 	// Muchas asignaturas están asociadas a un profesor
-	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"asignaturas", "rol","asignaturasProfesor", "id", "hibernateLazyInitializer", "handler" }) 
 	@JoinTable(name = "asignaturas_profesores", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_usuario"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "id_asignatura", "id_usuario" }) })
@@ -51,13 +51,13 @@ public class Asignatura implements Serializable {
 
 	//cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"asignaturas", "id", "asignaturasProfesor","rol" ,"hibernateLazyInitializer", "handler" }) 
 	@JoinTable(name = "asignaturas_alumnos", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_usuario"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "id_asignatura", "id_usuario" }) })
 	private List<Usuario> alumnos;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JsonIgnoreProperties({"asignaturas", "id", "rol" ,"hibernateLazyInitializer", "handler" }) 
 	@JoinTable(name = "asignaturas_practicas", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_practica"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "id_asignatura", "id_practica" }) })

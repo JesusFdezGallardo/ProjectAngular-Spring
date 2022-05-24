@@ -99,15 +99,10 @@ public class UsuarioRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		
-		try {
-			Rol rol = new Rol();		
-			
-			rol.setId((long) 1);
-			rol.setNombre("ROLE_USER");	
-			
+		try {	
 			List<Rol> listaroles = new ArrayList<>() ;
 			
-			listaroles.add(rol);
+			listaroles.addAll(usuario.getRoles());
 			usuario.setRoles(listaroles);
 			
 			//Encriptar contraseña
@@ -147,20 +142,15 @@ public class UsuarioRestController {
 		}
 		try {
 			usuarioActual.setNombre(usuario.getNombre());
+			usuarioActual.setUsuario(usuario.getUsuario());
 			usuarioActual.setPass(usuario.getPass());
 			usuarioActual.setApellido(usuario.getApellido());
 			usuarioActual.setCorreoElectronico(usuario.getCorreoElectronico());
-			/*
-			Rol rol = new Rol();		
-			
-			rol.setId((long) 1);
-			rol.setNombre("ROLE_USER");	
 			
 			List<Rol> listaroles = new ArrayList<>() ;
 			
-			listaroles.add(rol);
-			usuarioActual.setRoles(listaroles);
-			*/
+			listaroles.addAll(usuario.getRoles());
+			usuario.setRoles(listaroles);
 			usuarioUpdate = usuarioService.save(usuario);
 
 		} catch (DataAccessException e) {
