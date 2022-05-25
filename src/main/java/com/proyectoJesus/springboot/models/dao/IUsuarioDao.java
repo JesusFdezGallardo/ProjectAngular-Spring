@@ -17,10 +17,13 @@ public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 		
 	@Query("select user from Usuario user, Rol rol WHERE rol.nombre = 'ROLE_ALUMNO'")
 	public List<Usuario> findByRolAlumno(); 
-
+ 
 	@Query("select user from Usuario user, Rol rol WHERE rol.nombre = 'ROLE_PROFESOR'")
 	public List<Usuario> findByRolProfesor(); 
-	
+		
 	@Query
 	public Usuario findByUsuario(String usuario);
+	
+	@Query
+	public List<Usuario> findByNombre(String nombre);
 }

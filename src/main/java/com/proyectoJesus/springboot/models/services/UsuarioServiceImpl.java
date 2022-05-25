@@ -104,4 +104,10 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 		return usuariodao.findByRolAlumno();
 	}
 
+	@Override
+	public List<Usuario> findByNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return usuariodao.findByNombre(nombre);
+	}
+
 }

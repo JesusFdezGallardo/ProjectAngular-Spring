@@ -13,6 +13,8 @@ public interface IUsuarioService {
 
 	//Mostrar todos los usuarios
 	public List<Usuario> findAll();
+	public List<Usuario> findByNombre(String nombre);
+//	public List<Usuario> findByNombreContainingIgnoreCase(String usuario);
 
 	//Buscar usuario por Id
 	public Usuario finById(Long id);

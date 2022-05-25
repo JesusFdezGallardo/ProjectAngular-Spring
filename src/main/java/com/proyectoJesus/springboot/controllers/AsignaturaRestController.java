@@ -1,5 +1,6 @@
 package com.proyectoJesus.springboot.controllers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proyectoJesus.springboot.models.entity.Asignatura;
+import com.proyectoJesus.springboot.models.entity.Rol;
 import com.proyectoJesus.springboot.models.entity.Usuario;
 import com.proyectoJesus.springboot.models.services.IAsignaturaService;
 import com.proyectoJesus.springboot.models.services.IUsuarioService;
@@ -98,7 +100,7 @@ public class AsignaturaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_ADMIN")
+	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR"})
 	@PutMapping("/asignaturas/{id}")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<?> update(@Valid @RequestBody Asignatura asignatura, BindingResult result, @PathVariable Long id) {
@@ -120,6 +122,12 @@ public class AsignaturaRestController {
 		try {
 			asignaturaActual.setNombre(asignatura.getNombre());
 			asignaturaActual.setProfesor(asignatura.getProfesor());
+			
+			List<Usuario> listaUsuarios = new ArrayList<>() ;
+			
+			listaUsuarios.addAll(asignatura.getAlumnos());
+			asignaturaActual.setAlumnos(listaUsuarios);	
+			
 			asignaturaActualizada = asignaturaService.save(asignaturaActual);
 
 		} catch (DataAccessException e) {
@@ -147,10 +155,4 @@ public class AsignaturaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 
-	
-//	@PostMapping("/asignaturas")
-//	@ResponseStatus(HttpStatus.CREATED) 
-//	public Asignatura crear(@RequestBody Asignatura asignatura) {
-//		return asignaturaService.save(asignatura);
-//	}
 }
