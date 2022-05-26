@@ -105,10 +105,10 @@ public class UsuarioRestController {
 			listaroles.addAll(usuario.getRoles());
 			usuario.setRoles(listaroles);
 			
-			//Encriptar contraseña
-			String passwordBcrypt = passwordEncoder.encode(usuario.getPass());
-			 
-			usuario.setPass(passwordEncoder.encode(usuario.getPass()));
+//			//Encriptar contraseña
+//			String passwordBcrypt = passwordEncoder.encode(usuario.getPass());
+//			 
+//			usuario.setPass(passwordEncoder.encode(usuario.getPass()));
 			
 			usuarioNuevo = usuarioService.save(usuario);
 		} catch (DataAccessException e) {

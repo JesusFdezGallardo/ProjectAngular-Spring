@@ -52,18 +52,19 @@ public class Usuario implements Serializable {
 	private String correoElectronico;
 
 	@NotNull(message= " el campo rol no puede estar vacío")
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@JsonIgnoreProperties(allowSetters = true)
 	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="usuario_id"),
 	inverseJoinColumns=@JoinColumn(name="role_id"),
 	uniqueConstraints= {@UniqueConstraint(columnNames= {"usuario_id", "role_id"})})
 	private List<Rol> roles;
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "alumnos")
-	@JsonIgnoreProperties({"alumnos", "id", "hibernateLazyInitializer", "handler" }) 
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "alumnos", cascade = {CascadeType.PERSIST})
+	@JsonIgnoreProperties(value= {"alumnos", "id", "hibernateLazyInitializer", "handler" }, allowSetters = true) 
 	private List<Asignatura> asignaturas;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor") 
-	@JsonIgnoreProperties({"alumnos", "asignaturas", "practicas", "hibernateLazyInitializer", "handler" }) 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor", cascade = {CascadeType.PERSIST}) 
+	@JsonIgnoreProperties(value= {"alumnos", "asignaturas", "practicas", "hibernateLazyInitializer", "handler" }, allowSetters = true) 
 	private List<Asignatura> asignaturasProfesor;
 	
 	//Constructor arraylist Asignaturas	
