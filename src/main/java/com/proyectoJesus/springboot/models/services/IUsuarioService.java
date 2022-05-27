@@ -25,8 +25,9 @@ public interface IUsuarioService {
 	
 	//Rol
 	public List<Rol> findAllRoles();
-	public List<Usuario> findUsuariosAlumnos(); 
-	public List<Usuario> findByRolProfesor(); 
+	public List<Usuario> findByRolAlumno();
+	public List<Usuario> findByRolProfesor();
 	
+	//Buscar por nombre de usuario
 	public Usuario findByUsuario(String usuario);
 }

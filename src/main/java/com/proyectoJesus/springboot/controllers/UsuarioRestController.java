@@ -106,9 +106,8 @@ public class UsuarioRestController {
 			usuario.setRoles(listaroles);
 			
 //			//Encriptar contraseña
-//			String passwordBcrypt = passwordEncoder.encode(usuario.getPass());
-//			 
-//			usuario.setPass(passwordEncoder.encode(usuario.getPass()));
+			String passwordBcrypt = passwordEncoder.encode(usuario.getPass());	 
+			usuario.setPass(passwordEncoder.encode(usuario.getPass()));
 			
 			usuarioNuevo = usuarioService.save(usuario);
 		} catch (DataAccessException e) {
@@ -187,11 +186,10 @@ public class UsuarioRestController {
 		return usuarioService.findByRolProfesor();
 	}
 	
-	@Secured({"ROLE_ADMIN" , "ROLE_PROFESOR"})
 	@GetMapping("/usuarios/alumnos")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Usuario> listaAlumnos(){
-		return usuarioService.findUsuariosAlumnos();
+		return usuarioService.findByRolAlumno();
 	}
 	
 	@Secured("ROLE_ADMIN")

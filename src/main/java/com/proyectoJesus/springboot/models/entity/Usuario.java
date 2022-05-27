@@ -52,7 +52,7 @@ public class Usuario implements Serializable {
 	private String correoElectronico;
 
 	@NotNull(message= " el campo rol no puede estar vacío")
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties(allowSetters = true)
 	@JoinTable(name="usuarios_roles", joinColumns= @JoinColumn(name="usuario_id"),
 	inverseJoinColumns=@JoinColumn(name="role_id"),

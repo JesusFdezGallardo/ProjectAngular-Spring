@@ -92,22 +92,19 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	public List<Usuario> findByNombre(String nombre) {
+		return usuariodao.findByNombre(nombre);
+	}
+
+	@Override
 	public List<Usuario> findByRolProfesor() {
 		return usuariodao.findByRolProfesor();
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	public List<Usuario> findUsuariosAlumnos() {
-		// TODO Auto-generated method stub
+	public List<Usuario> findByRolAlumno() {
 		return usuariodao.findByRolAlumno();
 	}
 
-	@Override
-	public List<Usuario> findByNombre(String nombre) {
-		// TODO Auto-generated method stub
-		return usuariodao.findByNombre(nombre);
-	}
-
+	
 }
