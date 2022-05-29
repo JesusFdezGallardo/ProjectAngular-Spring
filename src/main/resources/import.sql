@@ -34,6 +34,27 @@ insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (4,1);
 insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (5,1); 
 insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (6,1); 
 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,2); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (2,2); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (3,2); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (4,2); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (5,2); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (6,2); 
+
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,3); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (2,3); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (3,3); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (4,3); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (5,3); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (6,3); 
+
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (1,4); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (2,4); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (3,4); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (4,4); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (5,4); 
+insert INTO asignaturas_alumnos (id_usuario, id_asignatura) VALUES (6,4); 
+
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 1); 
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 2); 
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 3); 

@@ -106,8 +106,9 @@ public class UsuarioRestController {
 			usuario.setRoles(listaroles);
 			
 //			//Encriptar contraseña
-			String passwordBcrypt = passwordEncoder.encode(usuario.getPass());	 
-			usuario.setPass(passwordEncoder.encode(usuario.getPass()));
+			String tmpPass = usuario.getPass();
+			String encriptado = passwordEncoder.encode(tmpPass);
+			usuario.setPass(encriptado);
 			
 			usuarioNuevo = usuarioService.save(usuario);
 		} catch (DataAccessException e) {
@@ -142,7 +143,11 @@ public class UsuarioRestController {
 		try {
 			usuarioActual.setNombre(usuario.getNombre());
 			usuarioActual.setUsuario(usuario.getUsuario());
-			usuarioActual.setPass(usuario.getPass());
+
+			String tmpPass = usuario.getPass();
+			String encriptado = passwordEncoder.encode(tmpPass);
+			usuario.setPass(encriptado);
+			
 			usuarioActual.setApellido(usuario.getApellido());
 			usuarioActual.setCorreoElectronico(usuario.getCorreoElectronico());
 			
@@ -203,5 +208,28 @@ public class UsuarioRestController {
 	public List<Usuario> filtrarUsuarios(@PathVariable String nombre){
 		return usuarioService.findByNombre(nombre);
 	}
-	
+
+	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR", "ROLE_ALUMNO"})
+	@GetMapping("/user/{nombreUsuario}")
+	@ResponseStatus(HttpStatus.OK) // Mensaje que muestra. 200 = búsqueda correcta
+	public ResponseEntity<?> getUsuario(@PathVariable String nombreUsuario) {
+		Usuario usuario = null;
+		// Tipo da dato MAP que almacene datos asociados a un nombre
+		Map<String, Object> response = new HashMap<>();
+		try {
+			usuario = usuarioService.findByUsuario(nombreUsuario);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error en la consulta en la BBDD!");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		// Error por id
+		if (usuario == null) {
+			response.put("mensaje", "El usuario con el id: " + nombreUsuario + " no existe en la BD!");
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		// Devuelve con argumento tipo de dato y la respuesta Http Status
+		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+	}
 }
