@@ -66,12 +66,27 @@ public class Usuario implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "profesor", cascade = {CascadeType.PERSIST}) 
 	@JsonIgnoreProperties(value= {"alumnos", "asignaturas", "practicas", "hibernateLazyInitializer", "handler" }, allowSetters = true) 
 	private List<Asignatura> asignaturasProfesor;
+		
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+	@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler"}, allowSetters = true) 
+	@JoinTable(name = "alumnos_practicas", joinColumns = @JoinColumn(name= "usuario_id"), 
+	inverseJoinColumns = @JoinColumn(name= "practica_id"))
+	private List<Practica> listaPracticas;
 	
 	//Constructor arraylist Asignaturas	
 	public Usuario() {
 		this.asignaturas = new ArrayList<>();
+		this.listaPracticas = new ArrayList<>();
 	}
 	
+	public List<Practica> getListaPracticas() {
+		return listaPracticas;
+	}
+
+	public void setListaPracticas(List<Practica> listaPracticas) {
+		this.listaPracticas = listaPracticas;
+	}
+
 	public Long getIdUsuario() {
 		return idUsuario;
 	}

@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -38,8 +39,21 @@ public class Practica implements Serializable{
 	
 	private String comentario; 
 		
-	private Long nota;
-			
+//	private Long nota;
+	
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+//	@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler" }, allowSetters = true) 
+//	private Asignatura asignaturaPractica; 
+	
+////	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+////	@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler" }, allowSetters = true) 
+////	@JoinTable(name = "alumnos_practicas")
+////	private List<Usuario> alumnosPractica;
+//	
+////	public Practica() {
+////		this.alumnosPractica = new ArrayList<>(); 
+////	}
+	
 	public Long getId() {
 		return idPractica;
 	}
@@ -64,13 +78,13 @@ public class Practica implements Serializable{
 		this.comentario = comentario;
 	}
 
-	public Long getNota() {
-		return nota;
-	}
-
-	public void setNota(Long nota) {
-		this.nota = nota;
-	}
+//	public Long getNota() {
+//		return nota;
+//	}
+//
+//	public void setNota(Long nota) {
+//		this.nota = nota;
+//	}
 
 	public Long getIdPractica() {
 		return idPractica;
@@ -79,5 +93,22 @@ public class Practica implements Serializable{
 	public void setIdPractica(Long idPractica) {
 		this.idPractica = idPractica;
 	}
+
+//	public Asignatura getAsignaturaPractica() {
+//		return asignaturaPractica;
+//	}
+//
+//	public void setAsignaturaPractica(Asignatura asignaturaPractica) {
+//		this.asignaturaPractica = asignaturaPractica;
+//	}
+
+//	public List<Usuario> getAlumnosPractica() {
+//		return alumnosPractica;
+//	}
+//
+//	public void setAlumnosPractica(List<Usuario> alumnosPractica) {
+//		this.alumnosPractica = alumnosPractica;
+//	}
+	
 	
 }

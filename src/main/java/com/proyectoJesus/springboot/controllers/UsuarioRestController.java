@@ -58,7 +58,7 @@ public class UsuarioRestController {
 	// error
 	// Se usa ? para decir que es un tipo de dato genérico, no tiene porque ser
 	// Usuario
-	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR"})
+	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR", "ROLE_ALUMNO"})
 	@GetMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.OK) // Mensaje que muestra. 200 = búsqueda correcta
 	public ResponseEntity<?> show(@PathVariable Long id) {

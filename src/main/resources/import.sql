@@ -60,10 +60,14 @@ insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 2);
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 3); 
 insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 4); 
 
-insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 1", 0, "Actividad 1"); 
-insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 2", 0, "Actividad 2"); 
-insert INTO practicas (comentario, nota, titulo) VALUES ("Comentario de texto 3", 0, "Actividad 3"); 
+insert INTO practicas (comentario, titulo) VALUES ("Comentario de texto 1", "Actividad 1"); 
+insert INTO practicas (comentario, titulo) VALUES ("Comentario de texto 2", "Actividad 2"); 
+insert INTO practicas (comentario, titulo) VALUES ("Comentario de texto 3", "Actividad 3"); 
 
 insert into asignaturas_practicas (id_asignatura, id_practica) VALUES (1,1); 
 insert into asignaturas_practicas (id_asignatura, id_practica) VALUES (1,2); 
 insert into asignaturas_practicas (id_asignatura, id_practica) VALUES (1,3); 
+
+INSERT INTO alumnos_practicas (practica_id, usuario_id) VALUES (1, 1); 
+INSERT INTO alumnos_practicas (practica_id, usuario_id) VALUES (2, 1); 
+INSERT INTO alumnos_practicas (practica_id, usuario_id) VALUES (3, 1); 

@@ -48,6 +48,7 @@ public class AsignaturaRestController {
 		return asignaturaService.findAll();
 	}
 	
+	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR", "ROLE_ALUMNO"})
 	@GetMapping("/asignaturas/{id}")
 	@ResponseStatus(HttpStatus.OK) // Mensaje que muestra. 200 = búsqueda correcta
 	public ResponseEntity<?> show(@PathVariable Long id) {
