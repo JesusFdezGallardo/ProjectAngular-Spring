@@ -33,21 +33,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private InfoAdicionalToken infoAdicionalToken;
 
+	//Configuración de los permisos.
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()")
 		.checkTokenAccess("isAuthenticated()");
 	}
 
-	
+	//Detalles del Cliente por el que me conecto
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		
-		clients.inMemory().withClient("angularapp")
-		.secret(passwordEncoder.encode("12345"))
-		.scopes("read", "write")
-		.authorizedGrantTypes("password", "refresh_token")
-		.accessTokenValiditySeconds(3600)
+		clients.inMemory().withClient("angularapp") //Usuario
+		.secret(passwordEncoder.encode("12345")) //Contraseña
+		.scopes("read", "write") //Permisos de lectura y escritura
+		.authorizedGrantTypes("password", "refresh_token") //Los authorizedGrantTypes de la app
+		.accessTokenValiditySeconds(3600) //tiempo que dura el acceso con el token en segundos
 		.refreshTokenValiditySeconds(3600);
 	}
 
@@ -56,12 +57,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(infoAdicionalToken, accessTokenConverter()));
-		
 		endpoints.authenticationManager(authenticationManager)
 		.tokenStore(tokenStore())
 		.accessTokenConverter(accessTokenConverter());
 	}
 
+	//Libreria de Spring para crear y validar los token
 	@Bean
 	public JwtTokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());

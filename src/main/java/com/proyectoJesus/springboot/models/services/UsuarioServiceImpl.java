@@ -27,23 +27,23 @@ import com.proyectoJesus.springboot.models.entity.Usuario;
 public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 
 	// Inyeccion del DAO en cualquier otro componente o clase de la aplicacion
+	//Con autowired
 	@Autowired
-	private IUsuarioDao usuariodao;
-
+	private IUsuarioDao usuariodao; //Interfaz IUsuarioDAO
+	//Clase Logger para realizar el login a la aplicacion y almacenar los datos
 	private Logger logger = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 
 	@Override
 	// Transaccion sólo de lectura. No es necesario porque lo da la clase
 	// CrudRepository. SOLO USAMOS METODOS PROPIOS
 	@Transactional(readOnly = true)
-	public List<Usuario> findAll() {
+	public List<Usuario> findAll() { //findALL método propio CRUDRepository
 		return (List<Usuario>) usuariodao.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Usuario finById(Long id) {
-		// TODO Auto-generated method stub
 		return usuariodao.findById(id).orElse(null);
 	}
 
@@ -69,6 +69,7 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 
 	@Override
 	@Transactional(readOnly = true)
+	//Metodo de la clase UserDetailsService para realizar el login
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = usuariodao.findByUsuario(username);
 
@@ -106,5 +107,9 @@ public class UsuarioServiceImpl implements IUsuarioService, UserDetailsService {
 		return usuariodao.findByRolAlumno();
 	}
 
-	
+	@Override
+	public List<Usuario> findAlumnos(String consulta) {
+		return usuariodao.findAlumnos(consulta);
+	}
+
 }

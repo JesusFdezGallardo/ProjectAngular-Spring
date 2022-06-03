@@ -28,12 +28,13 @@ public class Usuario implements Serializable {
 	private Long idUsuario;
 
 	// Anotación para validar el nombre
-	@NotEmpty(message = "no puede estar vacío") // Anotacion para cambiar el idioma y mensajes de error
+	@NotEmpty(message = "no puede estar vacío")
 	@Size(min = 4, max = 12)
 	@Column(nullable = false, name = "nombre")
 	private String nombre;
 	
-	@NotEmpty(message = "no puede estar vacío") // Anotacion para cambiar el idioma y mensajes de error
+	 // Anotacion para cambiar el idioma y mensajes de error
+	@NotEmpty(message = "no puede estar vacío")
 	@Column(nullable = false, name = "usuario", unique = true)
 	private String usuario;
 
@@ -44,6 +45,8 @@ public class Usuario implements Serializable {
 	@NotEmpty(message = "no puede estar vacío")
 	@Column(name = "apellido")
 	private String apellido;
+	
+	private boolean activo;
 
 	// El email es único y no se puede repetir
 	@NotEmpty(message = "no puede estar vacío")
@@ -163,6 +166,14 @@ public class Usuario implements Serializable {
 
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
+	}
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 	
 	

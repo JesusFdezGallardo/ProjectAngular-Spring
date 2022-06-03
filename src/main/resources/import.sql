@@ -2,15 +2,15 @@ insert INTO roles (nombre) VALUES ("ROLE_ALUMNO");
 insert INTO roles (nombre) VALUES ("ROLE_ADMIN"); 
 insert INTO roles (nombre) VALUES ("ROLE_PROFESOR"); 
 
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('jesusf', 'Fernandez', 'jesus@gmail.com', 'Jesus', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('lauraf', 'Fernandez', 'laura@gmail.com', 'Laura', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('juanf', 'Fernandez', 'juan@gmail.com', 'Juan', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('pepef', 'Fernandez', 'pepe@gmail.com', 'Pepe', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('ramonf', 'Fernandez', 'ramon@gmail.com', 'Ramon', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('mariaf', 'Fernandez', 'maria@gmail.com', 'Maria', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK');
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('jesusf', 'Fernandez', 'jesus@gmail.com', 'Jesus', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK', 1);
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('lauraf', 'Fernandez', 'laura@gmail.com', 'Laura', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK', 1);
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('juanf', 'Fernandez', 'juan@gmail.com', 'Juan', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK', 1);
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('pepef', 'Fernandez', 'pepe@gmail.com', 'Pepe', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK', 1);
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('ramonf', 'Fernandez', 'ramon@gmail.com', 'Ramon', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK', 1);
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('mariaf', 'Fernandez', 'maria@gmail.com', 'Maria', '$2a$10$nC30lb2H7Kw2kP6JcrHe7eX1JK/G3VQACMrTlhTxqHfklR.2gHhTK', 1);
 
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('axelf', 'Fernandez', 'axel@gmail.com', 'Axel', '$2a$10$3nGpYeEmoobDCg6nrg0JquAT0btp1YIN9StJ2yg4d5lJdh6KYA0ey');
-insert into usuarios (usuario, apellido, correo, nombre, pass) VALUES ('josef', 'Fernandez', 'jose@gmail.com', 'Jose', '$2a$10$PnB94Tqe2CpymYO.z3TvXuSdaBfP9KmkNUxormKkU4PbAyCK/dWIO');
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('axelf', 'Fernandez', 'axel@gmail.com', 'Axel', '$2a$10$3nGpYeEmoobDCg6nrg0JquAT0btp1YIN9StJ2yg4d5lJdh6KYA0ey', 1);
+insert into usuarios (usuario, apellido, correo, nombre, pass, activo) VALUES ('josef', 'Fernandez', 'jose@gmail.com', 'Jose', '$2a$10$PnB94Tqe2CpymYO.z3TvXuSdaBfP9KmkNUxormKkU4PbAyCK/dWIO', 1);
 
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 1);

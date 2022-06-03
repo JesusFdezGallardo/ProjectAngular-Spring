@@ -165,9 +165,28 @@ public class UsuarioRestController {
 		response.put("mensaje", "El usuario ha sido actualizado con éxito");
 		response.put("usuario", usuarioUpdate);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
-
 	}
-	
+
+	@Secured("ROLE_ADMIN")
+	@PutMapping("/usuarios/delete/{id}")
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<?> eliminar (@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+		Usuario usuarioActual = usuarioService.finById(id); // Modifico usuario con el usuario registrado en la bbdd
+
+		try {
+			usuarioActual.setActivo(false);
+			usuarioService.save(usuarioActual);
+
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al eliminar el usuario en la BBDD!");
+			response.put("error", e.getMostSpecificCause().getMessage());
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		response.put("mensaje", "El usuario ha sido eliminado con éxito!");
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+	}
+
 	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/usuarios/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
@@ -206,7 +225,7 @@ public class UsuarioRestController {
 	@GetMapping("/usuarios/filtrar-usuarios/{nombre}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Usuario> filtrarUsuarios(@PathVariable String nombre){
-		return usuarioService.findByNombre(nombre);
+		return usuarioService.findAlumnos(nombre);
 	}
 
 	@Secured({"ROLE_ADMIN", "ROLE_PROFESOR", "ROLE_ALUMNO"})
@@ -232,4 +251,5 @@ public class UsuarioRestController {
 		// Devuelve con argumento tipo de dato y la respuesta Http Status
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 	}
+	
 }

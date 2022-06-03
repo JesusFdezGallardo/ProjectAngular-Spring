@@ -30,4 +30,7 @@ public interface IUsuarioService {
 	
 	//Buscar por nombre de usuario
 	public Usuario findByUsuario(String usuario);
+	
+	//Busqueda filtrar nombre alumnos
+	public List<Usuario> findAlumnos(String consulta);
 }

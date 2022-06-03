@@ -140,6 +140,7 @@ public class AsignaturaRestController {
 		response.put("usuario", asignaturaActualizada);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
+	
 	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/asignaturas/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

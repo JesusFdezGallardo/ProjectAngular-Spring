@@ -19,11 +19,14 @@ import org.springframework.web.filter.CorsFilter;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
+	//Clase de configuración de los distintos permisos
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/usuarios", "/api/asignaturas", "/api/usuarios/alumnos").permitAll()
+		//Rutas al controlador permitidas sin necesidad de validar
+		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/usuarios", "/api/asignaturas").permitAll()
+		 //Ruta generica para cualquier accion derivada. NO NECESARIO AL USAR ANOTACIONES SPRING
 //		.antMatchers(HttpMethod.GET, "/api/usuarios/{id}").hasAnyRole("PROFESOR", "ADMIN")
-//		.antMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN") //Ruta generica para cualquier accion derivada de la ruta de la api
+//		.antMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN")
 //		.antMatchers("/api/usuarios/**").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
@@ -32,11 +35,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
+		//Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-		
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
 		return source;
@@ -44,7 +47,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter(){
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>
+		(new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}

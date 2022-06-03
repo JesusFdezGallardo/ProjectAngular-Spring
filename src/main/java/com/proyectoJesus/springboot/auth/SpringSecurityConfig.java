@@ -30,6 +30,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		//Configuración del usuario mediante la interfaz UserDetailsService que 
+		//que se utiliza para recuperar la información de autenticación y autorización del usuario
 		auth.userDetailsService(this.iUsuarioService).passwordEncoder(passwordEncoder());
 	}
 

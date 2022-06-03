@@ -15,10 +15,12 @@ public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 	@Query("from Rol")
 	public List<Rol> findAllRoles();
 		
-	@Query(value="select u.id_usuario, u.apellido, u.correo, u.nombre, u.pass, u.usuario from usuarios u, roles r, usuarios_roles ur where r.nombre = 'ROLE_ALUMNO' and ur.role_id = r.id and ur.usuario_id = u.id_usuario", nativeQuery=true)
+	@Query(value="select u.id_usuario, u.apellido, u.correo, u.nombre, u.pass, u.usuario, u.activo from usuarios u, roles r, usuarios_roles ur "
+			+ "where r.nombre = 'ROLE_ALUMNO' and ur.role_id = r.id and ur.usuario_id = u.id_usuario and u.activo = 1", nativeQuery=true)
 	public List<Usuario> findByRolAlumno();
 	
-	@Query(value="select u.id_usuario, u.apellido, u.correo, u.nombre, u.pass, u.usuario from usuarios u, roles r, usuarios_roles ur where r.nombre = 'ROLE_PROFESOR' and ur.role_id = r.id and ur.usuario_id = u.id_usuario", nativeQuery=true)
+	@Query(value="select u.id_usuario, u.apellido, u.correo, u.nombre, u.pass, u.usuario, u.activo from usuarios u, roles r, usuarios_roles ur "
+			+ "where r.nombre = 'ROLE_PROFESOR' and ur.role_id = r.id and ur.usuario_id = u.id_usuario and u.activo = 1", nativeQuery=true)
 	public List<Usuario> findByRolProfesor();
 		
 	@Query
@@ -26,4 +28,10 @@ public interface IUsuarioDao extends CrudRepository<Usuario, Long>{
 		
 	@Query()
 	public List<Usuario> findByNombre(String nombre);
+	
+	//Filtrado de usuarios alumno por nombre
+	@Query(value="select u.id_usuario, u.apellido, u.correo, u.nombre, u.pass, u.usuario, u.activo from usuarios u, roles r, usuarios_roles ur "
+			+ "where r.nombre = 'ROLE_ALUMNO' and ur.role_id = r.id and ur.usuario_id = u.id_usuario and u.activo = 1 and u.nombre= :consulta", nativeQuery=true)
+	public List<Usuario> findAlumnos(String consulta);
+	
 }
