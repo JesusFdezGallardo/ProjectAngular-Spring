@@ -38,4 +38,9 @@ public class PracticaServiceImpl  implements IPracticaService{
 		
 	}
 
+	@Override
+	public List<Practica> findPracticasByAlumno(Long id) {
+		return iPracticaDAO.findPracticasByAlumno(id);
+	}
+
 }

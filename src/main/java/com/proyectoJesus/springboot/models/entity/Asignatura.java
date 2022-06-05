@@ -56,16 +56,14 @@ public class Asignatura implements Serializable {
 	@JoinTable(name = "asignaturas_alumnos", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_usuario"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "id_asignatura", "id_usuario" }) })
 	private List<Usuario> alumnos;
-
-	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
-	@JsonIgnoreProperties(value= {"asignaturas", "id", "rol" ,"hibernateLazyInitializer", "handler" }, allowSetters = true) 
-	@JoinTable(name = "asignaturas_practicas", joinColumns = @JoinColumn(name = "id_asignatura"), inverseJoinColumns = @JoinColumn(name = "id_practica"), uniqueConstraints = {
-			@UniqueConstraint(columnNames = { "id_asignatura", "id_practica" }) })
-	private List<Practica> practicas; 
+	
+//	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE}, mappedBy = "practicas")
+//	@JsonIgnoreProperties(value= {"hibernateLazyInitializer", "handler" }, allowSetters = true) 
+//	private List<Practica> practicas; 
 	
 	public Asignatura() {
 		this.alumnos = new ArrayList<>();
-		this.practicas = new ArrayList<>();
+//		this.practicasAsignatura = new ArrayList<>();
 	}
 
 	public List<Usuario> getAlumnos() {
@@ -108,12 +106,12 @@ public class Asignatura implements Serializable {
 		this.profesor = profesor;
 	}
 
-	public List<Practica> getPracticas() {
-		return practicas;
-	}
-
-	public void setPracticas(List<Practica> practicas) {
-		this.practicas = practicas;
-	}
+//	public List<Practica> getPracticas() {
+//		return practicas;
+//	}
+//
+//	public void setPracticas(List<Practica> practicas) {
+//		this.practicas = practicas;
+//	}
 
 }

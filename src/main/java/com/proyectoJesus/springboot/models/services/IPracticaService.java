@@ -16,4 +16,7 @@ public interface IPracticaService {
 	//Metodos CRUD
 	public Practica save(Practica practica);
 	public void delete (Long id);
+	
+	//Buscar practicas por alumno
+	public List<Practica> findPracticasByAlumno(Long id);
 }

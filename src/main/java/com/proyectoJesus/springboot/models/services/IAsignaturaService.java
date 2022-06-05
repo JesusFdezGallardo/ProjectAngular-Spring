@@ -17,5 +17,4 @@ public interface IAsignaturaService {
 	public Asignatura save(Asignatura asignatura);
 	public void delete (Long id);
 	
-	
 }
