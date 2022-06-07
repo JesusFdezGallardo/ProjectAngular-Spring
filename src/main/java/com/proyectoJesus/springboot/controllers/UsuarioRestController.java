@@ -37,7 +37,7 @@ import com.proyectoJesus.springboot.models.entity.Usuario;
 import com.proyectoJesus.springboot.models.services.IAsignaturaService;
 import com.proyectoJesus.springboot.models.services.IUsuarioService;
 
-@CrossOrigin(origins = { "http://localhost:4200" }) // Comunica cliente servidor--> Angular - Spring
+@CrossOrigin(origins = { "http://localhost:4200" , "*"}) // Comunica cliente servidor--> Angular - Spring
 @RestController // Indica que es un Rest Controller
 @RequestMapping("/api") // Indica la URL
 public class UsuarioRestController {

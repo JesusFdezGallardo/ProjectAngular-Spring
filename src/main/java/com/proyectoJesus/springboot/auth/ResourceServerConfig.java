@@ -24,10 +24,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		//Rutas al controlador permitidas sin necesidad de validar
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/usuarios", "/api/asignaturas").permitAll()
-		 //Ruta generica para cualquier accion derivada. NO NECESARIO AL USAR ANOTACIONES SPRING
-//		.antMatchers(HttpMethod.GET, "/api/usuarios/{id}").hasAnyRole("PROFESOR", "ADMIN")
-//		.antMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN")
-//		.antMatchers("/api/usuarios/**").hasRole("ADMIN")
 		.anyRequest().authenticated()
 		.and().cors().configurationSource(corsConfigurationSource());
 	}
@@ -36,7 +32,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		//Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //Nombre de dominio de Angular. * indica admite cualquier origen  ,"*"
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));

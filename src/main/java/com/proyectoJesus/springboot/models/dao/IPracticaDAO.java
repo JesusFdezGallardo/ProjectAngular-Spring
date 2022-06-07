@@ -14,8 +14,5 @@ public interface IPracticaDAO extends CrudRepository<Practica, Long>{
 			+ "where u.id_usuario = :id and u.id_usuario = ap.id_usuario and p.id_practica = ap.id_practica", nativeQuery=true)
 	public List<Practica> findPracticasByAlumno(Long id);
 	
-/*
- * 	@Query(value="select p.id_practica, p.titulo, p.comentario, p.asignatura_id_asignatura from usuarios u, practicas p, alumnos_practicas ap "
-			+ "where u.id_usuario = :id and u.id_usuario = ap.practicas_id_usuario and p.id_practica = ap.practica_id_practica", nativeQuery=true)
- */
+
 }

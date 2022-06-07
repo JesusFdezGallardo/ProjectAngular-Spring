@@ -32,7 +32,7 @@ import com.proyectoJesus.springboot.models.services.IAsignaturaService;
 import com.proyectoJesus.springboot.models.services.IPracticaService;
 import com.proyectoJesus.springboot.models.services.IUsuarioService;
 
-@CrossOrigin(origins = { "http://localhost:4200" }) // Comunica cliente servidor--> Angular - Spring
+@CrossOrigin(origins = { "http://localhost:4200" , "*"}) // Comunica cliente servidor--> Angular - Spring
 @RestController // Indica que es un Rest Controller
 @RequestMapping("/api") // Indica la URL
 public class PracticaRestController {
@@ -83,6 +83,7 @@ public class PracticaRestController {
 
 		Practica practicaNueva = null;
 		Asignatura asignatura = iAsignaturaService.findById(id);
+		System.out.println(asignatura.getId());
 		Map<String, Object> response = new HashMap<>();
 
 		// Comprobamos si hay errores antes de guardar usuario
