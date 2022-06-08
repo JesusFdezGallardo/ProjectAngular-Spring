@@ -12,7 +12,7 @@
 	<groupId>com.miterisschool.proyecto.final.jesus</groupId>
 	<artifactId>proyecto-final-jesus</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<!-- <packaging>jar</packaging> -->
 	<name>proyecto-final-jesus</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
