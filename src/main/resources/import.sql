@@ -62,4 +62,4 @@ insert INTO asignaturas_profesores (id_usuario, id_asignatura) values (8, 4);
 
 INSERT INTO practicas (`comentario`, `titulo`, `asignatura_id_asignatura`) VALUES ('Prueba', 'Prueba de texto', 1);
 
-INSERT INTO alumnos_practicas (`practica_id_practica`, `practicas_id_usuario`) VALUES (1, 1)
+INSERT INTO alumnos_practicas (id_practica, id_usuario) VALUES (1, 1)

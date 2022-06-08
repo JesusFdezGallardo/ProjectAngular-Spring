@@ -32,9 +32,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration();
 		//Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
-		config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //Nombre de dominio de Angular. * indica admite cualquier origen  ,"*"
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "*")); //Nombre de dominio de Angular. * indica admite cualquier origen  ,"*"
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-		config.setAllowCredentials(true);
+//		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);
