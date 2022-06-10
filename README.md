@@ -1,4 +1,4 @@
-# ProyectoJesus full stack Angular + Spring
+# Proyecto web full stack Angular + Spring
 
 This project was generated with Springboot and Java 11
 
