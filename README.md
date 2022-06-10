@@ -4,7 +4,8 @@ This project was generated with Springboot and Java 11
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+From the general project path type in console => `.\mvnw package` to generate the jar file. 
+Launch => `java -jar project-final-jesus-0.0.1-SNAPSHOT.jar`
 
 ## Code scaffolding
 
