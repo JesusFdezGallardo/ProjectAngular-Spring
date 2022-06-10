@@ -25,29 +25,44 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		//Rutas al controlador permitidas sin necesidad de validar
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/usuarios", "/api/asignaturas").permitAll()
 		.anyRequest().authenticated()
-		.and().cors();
-		
-//		configurationSource(corsConfigurationSource());
+		.and().cors().configurationSource(corsConfigurationSource());
 	}
 
-//	@Bean
-//	public CorsConfigurationSource corsConfigurationSource() {
-//		CorsConfiguration config = new CorsConfiguration();
-//		//Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
-//		config.setAllowedOrigins(Arrays.asList("https://proyectojesus-springboot.herokuapp.com")); //Nombre de dominio de Angular. * indica admite cualquier origen  ,"*"
-//		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-//		config.setAllowCredentials(true);
-//		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		source.registerCorsConfiguration("/**", config);
-//		return source;
-//	}
-//	
-//	@Bean
-//	public FilterRegistrationBean<CorsFilter> corsFilter(){
-//		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>
-//		(new CorsFilter(corsConfigurationSource()));
-//		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-//		return bean;
-//	}
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration config = new CorsConfiguration();
+		//Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //Nombre de dominio de Angular. * indica admite cualquier origen  ,"*"
+		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		config.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
+				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
+				"Access-Control-Request-Method", "Access-Control-Request-Headers"));
+		config.setExposedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization",
+				"Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+		config.setAllowCredentials(true);
+		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+		return source;
+	}
+	/*
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration config = new CorsConfiguration();
+		//Añadimos dominio de servidor. Con * indicamos que puede ser cualquier origen 
+		config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //Nombre de dominio de Angular. * indica admite cualquier origen  ,"*"
+		config.setAllowCredentials(true);
+		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+		return source;
+	}
+	*/
+	@Bean
+	public FilterRegistrationBean<CorsFilter> corsFilter(){
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>
+		(new CorsFilter(corsConfigurationSource()));
+		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+		return bean;
+	}
 }
