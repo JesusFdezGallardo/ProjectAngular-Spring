@@ -9,9 +9,9 @@ Este proyecto mostrará el desarrollo de un software completo para la gestión d
 El proyecto se ha desarrollado usando Angular para el desarrollo web y Java Spring para la creación del servidor. La base de datos está desarrollada con MySQL. El servidor y la base de datos correrán desde un servidor en la nube de Heroku.
 
 Usuarios de ejemplo: 
---> Admin (axelf -- 12345)
---> Profesor (josef -- 12345)
---> Alumno (jesusf -- 12345)
+Admin (axelf -- 12345)
+Profesor (josef -- 12345)
+Alumno (jesusf -- 12345)
 
 ## Abstract
 
@@ -20,9 +20,9 @@ This project will show the development of a complete software for the management
 The project has been developed using Angular for the web development and Java Spring for the creation of the server. The database is developed with MySQL. The server and the database will run from a server in the Heroku cloud.
 
 Example users: 
---> Admin (axelf -- 12345)
---> Profesor (josef -- 12345)
---> Alumno (jesusf -- 12345)
+Admin (axelf -- 12345)
+Profesor (josef -- 12345)
+Alumno (jesusf -- 12345)
 
 ## Development server
 
